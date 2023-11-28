@@ -3,53 +3,20 @@ import java.util.Scanner;
 public class tankCreator {
 
     public enum TankType {
-        LIGHT("Light Tank"), MEDIUM("Medium Tank"), HEAVY("Heavy Tank");
-
-        private final String type;
-        TankType(String type) {
-            this.type = type;
-        }
-
-        @Override
-        public String toString() {
-            return type;
-        }
+        LIGHT, MEDIUM, HEAVY
     }
-
     public enum ArmorType {
-        EXPLOSIVE_REACTIVE("Explosive Reactive Armor"),
-        NON_EXPLOSIVE_REACTIVE("Non-Explosive Reactive Armor"),
-        COMPOSITE("Composite Armor"),
-        STEEL("Steel Armor");
-    
-        private final String displayName;
-    
-        ArmorType(String displayName) {
-            this.displayName = displayName;
-        }
-    
-        @Override
-        public String toString() {
-            return displayName;
-        }
+        EXPLOSIVE_REACTIVE,
+        NON_EXPLOSIVE_REACTIVE,
+        COMPOSITE,
+        STEEL
     }
     
     public enum ShellType {
-        ARMOR_PIERCING("Armor Piercing"),
-        HIGH_EXPLOSIVE("High Explosive"),
-        HEAT("High-Explosive Anti-Tank"),
-        SABOT("Armour-Piercing Fin-Stabilized Discarding Sabot");
-    
-        private final String displayName;
-    
-        ShellType(String displayName) {
-            this.displayName = displayName;
-        }
-    
-        @Override
-        public String toString() {
-            return displayName;
-        }
+        ARMOR_PIERCING,
+        HIGH_EXPLOSIVE,
+        HEAT,
+        SABOT
     }
 
 
@@ -105,29 +72,62 @@ public class tankCreator {
         return shell;
     }
 
-    public String getTankType() {
-        return tankType.toString();
+    public TankType getTankType() {
+        return tankType;
     }
 
     public String getTankName() {
         return tankName;
     }
 
-    public String getArmorType() {
-        return armorType.toString();
+    public ArmorType getArmorType() {
+        return armorType;
     }
 
-    public String getshellType() {
-        return shellType.toString();
+    public ShellType getshellType() {
+        return shellType;
     }
 
-    public void tankDecider() {
+    public TankType tankDecider() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose a tank type (1: LIGHT, 2: MEDIUM, 3: HEAVY):");
+        int choice = scanner.nextInt();
 
+        switch (choice) {
+            case 1:
+                setTankType(TankType.LIGHT);
+                break;
+            case 2:
+                setTankType(TankType.MEDIUM);
+                break;
+            case 3:
+                setTankType(TankType.HEAVY);
+                break;
+            default:
+                System.out.println("Invalid choice. Defaulting to LIGHT.");
+                setTankType(TankType.LIGHT);
+        }
+        scanner.close();
+        return this.tankType;
+
+        
     }
 
     public void tankPrintDefaultValues() {
-        System.out.println("Tank Main Values");
+        System.out.println("Tank Details");
         System.out.println("----------------------------------------");
-        System.out.println();
+        System.out.println("Tank Name: " + tankName);
+        System.out.println("Tank Type: " + tankType);
+        System.out.println("Tank Max Speed: " + speed + "mph");
+        System.out.println("Tank Turning Speed: " + turningSpeed + "aps(angle per second)");
+        System.out.println("Tank Armor: " + armorType);
+        System.out.println("Tank Armor Thickness: " + armorThickness + "mm");
+        System.out.println("Tank Shell Ammo: " + shell);
+        System.out.println("Shell Velocity: " + shellVelocity + "");
+        System.out.println("Shell Type: " + shellType);
     }
+
+	public void setTankType(TankType newTankType) {
+        this.tankType = newTankType;
+	}
 }
