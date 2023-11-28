@@ -128,6 +128,6 @@ public class tankCreator {
     public void tankPrintDefaultValues() {
         System.out.println("Tank Main Values");
         System.out.println("----------------------------------------");
-        System.out.println()
+        System.out.println();
     }
 }
