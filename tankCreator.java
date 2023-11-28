@@ -2,8 +2,64 @@ import java.util.Scanner;
 
 public class tankCreator {
 
+    public enum TankType {
+        LIGHT("Light Tank"), MEDIUM("Medium Tank"), HEAVY("Heavy Tank");
+
+        private final String type;
+        TankType(String type) {
+            this.type = type;
+        }
+
+        @Override
+        public String toString() {
+            return type;
+        }
+    }
+
+    public enum ArmorType {
+        EXPLOSIVE_REACTIVE("Explosive Reactive Armor"),
+        NON_EXPLOSIVE_REACTIVE("Non-Explosive Reactive Armor"),
+        COMPOSITE("Composite Armor"),
+        STEEL("Steel Armor");
+    
+        private final String displayName;
+    
+        ArmorType(String displayName) {
+            this.displayName = displayName;
+        }
+    
+        @Override
+        public String toString() {
+            return displayName;
+        }
+    }
+    
+    public enum ShellType {
+        ARMOR_PIERCING("Armor Piercing"),
+        HIGH_EXPLOSIVE("High Explosive"),
+        HEAT("High-Explosive Anti-Tank"),
+        SABOT("Armour-Piercing Fin-Stabilized Discarding Sabot");
+    
+        private final String displayName;
+    
+        ShellType(String displayName) {
+            this.displayName = displayName;
+        }
+    
+        @Override
+        public String toString() {
+            return displayName;
+        }
+    }
+
+
+
     private int speed, turningSpeed, shellVelocity, armorThickness;
-    private String shell, tankType, tankName, armorType, shellType;
+    private String shell;
+    private String tankName;
+    private TankType tankType;
+    private ArmorType armorType;
+    private ShellType shellType;
 
     public tankCreator() {
         speed = 16; // mph
@@ -11,13 +67,13 @@ public class tankCreator {
         shellVelocity = 140; //meters per second
         armorThickness = 20; // millimeters
         shell = "100mm"; 
-        tankType = "Light Tank";
+        tankType = TankType.LIGHT;
         tankName = "Base Tank";
-        armorType = "Non-Explosive Reactive Armor";
-        shellType = "Armor Piercing"; //AP or HE(High Explosive)
+        armorType = ArmorType.EXPLOSIVE_REACTIVE;
+        shellType = ShellType.ARMOR_PIERCING; //AP or HE(High Explosive)
     }
 
-    public tankCreator(int spd, int tspd, int bullvelo, int armrthcknss, String bull, String tnktype, String tnkname, String armrtype, String bullType) {
+    public tankCreator(int spd, int tspd, int bullvelo, int armrthcknss, String bull, TankType tnktype, String tnkname, ArmorType armrtype, ShellType bullType) {
         speed = spd;
         turningSpeed = tspd;
         shellVelocity = bullvelo;
@@ -50,7 +106,7 @@ public class tankCreator {
     }
 
     public String getTankType() {
-        return tankType;
+        return tankType.toString();
     }
 
     public String getTankName() {
@@ -58,10 +114,20 @@ public class tankCreator {
     }
 
     public String getArmorType() {
-        return armorType;
+        return armorType.toString();
     }
 
     public String getshellType() {
-        return shellType;
+        return shellType.toString();
+    }
+
+    public void tankDecider() {
+
+    }
+
+    public void tankPrintDefaultValues() {
+        System.out.println("Tank Main Values");
+        System.out.println("----------------------------------------");
+        System.out.println()
     }
 }
