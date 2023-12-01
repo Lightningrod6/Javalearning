@@ -177,18 +177,23 @@ public class tankCreator {
         switch (choice) {
             case 1:
                 setCaliber(Caliber.SEVENTY_SIX_MM);
+                setShellVelocity(915);
             break;
             case 2:
                 setCaliber(Caliber.NINETY_MM);
+                setShellVelocity(810);
             break;
             case 3:
                 setCaliber(Caliber.ONE_HUNDRED_MM);
+                setShellVelocity(900);
             break;
             case 4:
                 setCaliber(Caliber.ONE_HUNDRED_FIVE_MM);
+                setShellVelocity(415);
             break;
             case 5: 
                 setCaliber(Caliber.ONE_HUNDRED_TWENTY_MM);
+                setShellVelocity(1530);
             break;
                 default:
                 System.out.println("Invalid choice. Defaulting to 76mm.");
@@ -222,8 +227,34 @@ public class tankCreator {
         }
 
         return this.armorType;
-    }        
-    public void tankPrintDefaultValues() {
+    }
+    
+    public ShellType shellTypeDecider() {
+        Scanner scanner4 = new Scanner(System.in);
+        System.out.println("Choose a shell type {1: AP, 2: HE, 3: HEAT, 4: SABOT}");
+
+        int choice = scanner4.nextInt();
+        switch (choice) {
+            case 1:
+            setShellType(ShellType.ARMOR_PIERCING);
+            break;
+            case 2:
+            setShellType(ShellType.HIGH_EXPLOSIVE);
+            break;
+            case 3:
+            setShellType(ShellType.HEAT);
+            break;
+            case 4:
+            setShellType(ShellType.SABOT);
+            break;
+            default:
+            System.out.println("Invalid Choice, Defaulting to AP");
+            setShellType(ShellType.ARMOR_PIERCING);
+        }
+
+        return this.shellType;
+    }
+    public void tankPrint() {
         System.out.println("Tank Details");
         System.out.println("----------------------------------------");
         System.out.println("Tank Name: " + tankName);
@@ -232,7 +263,7 @@ public class tankCreator {
         System.out.println("Tank Turning Speed: " + turningSpeed + "aps(angle per second)");
         System.out.println("Tank Armor: " + armorType);
         System.out.println("Tank Armor Thickness: " + armorThickness + "mm");
-        System.out.println("Tank Shell Ammo: " + caliber);
+        System.out.println("Tank Caliber Ammo: " + caliber);
         System.out.println("Shell Velocity: " + shellVelocity + "");
         System.out.println("Shell Type: " + shellType);
     }
@@ -260,5 +291,15 @@ public class tankCreator {
         this.armorThickness = newArmorThickness;
     }
 
-    
+    public void setShellType(ShellType newShellType) {
+        this.shellType = newShellType;
+    }
+
+    public void setShellVelocity(int newShellVelocity) {
+        this.shellVelocity = newShellVelocity;
+    }
+
+    public void setTankName(String newTankName) {
+        this.tankName = newTankName;
+    }
 }

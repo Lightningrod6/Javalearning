@@ -50,6 +50,27 @@ public class tankOne {
                 Thread.sleep(2000);
             }
             javelin.setCaliber(decision2);
+
+            System.out.println("Now its time to select what shell you will use. Depending on the shell, it can either do more or less damage.");
+
+            tankCreator.ShellType decision4 = javelin.shellTypeDecider();
+            if(decision4 == tankCreator.ShellType.ARMOR_PIERCING) {
+                System.out.println("Selected Shell Type: Armor Piercing");
+                Thread.sleep(2000);
+            } else if(decision4 == tankCreator.ShellType.HIGH_EXPLOSIVE) {
+                System.out.println("Selected Shell Type: High Explosive");
+                Thread.sleep(2000);
+            } else if(decision4 == tankCreator.ShellType.HEAT) {
+                System.out.println("Selected Shell Type: HEAT");
+                Thread.sleep(2000);
+            } else if(decision4 == tankCreator.ShellType.SABOT) {
+                System.out.println("Selected Shell Type: SABOT");
+                Thread.sleep(2000);
+            }
+
+            javelin.setShellType(decision4);
+
+
             System.out.println("Now its time to choose the armor type. These can vary in how strong your tank is but it can either increase or decrease the tank's max speed");
             tankCreator.ArmorType decision3 = javelin.armorTypeDecider();
             if (decision3 == tankCreator.ArmorType.EXPLOSIVE_REACTIVE) {
@@ -71,7 +92,33 @@ public class tankOne {
             
             javelin.setArmorType(decision3);
 
-            System.out.println("Now its time to create your armor thickness. With the addition of your armor. For every 25mm you add your speed will decrease by atleast 1 so be cautios as your speed is set at " + javelin.getTankSpeed()1);
+            System.out.println("Now its time to create your armor thickness. With the addition of your armor. For every 25mm you add your speed will decrease by atleast 1 so be cautios as your speed is set at " + javelin.getTankSpeed());
+            int  armorThicknessOption = keyboard.nextInt();
+            if (armorThicknessOption > 80) {
+                System.out.println("Cannot go above 80mm(Armor Thickness). Please enter a new thickness:");
+                armorThicknessOption = keyboard.nextInt();
+            }
+            javelin.setArmorThickness(armorThicknessOption);
+            System.out.println("The armor thickness has now been set to " + javelin.getArmorThickness());
+            Thread.sleep(1000);
+            System.out.println("We are almost done!");
+            Thread.sleep(1000);
+            System.out.println("Now its time to give your unique tank a name!");
+            Thread.sleep(1000);
+            System.out.print("Enter a name: ");
+            keyboard.nextLine();
+            String nameTank = keyboard.nextLine();
+
+            if(nameTank ==  null) {
+                System.out.println("Cannot put in empty values");
+                nameTank = keyboard.nextLine();
+            } else {
+                javelin.setTankName(nameTank);
+                System.out.println("Congratulations! You have created a tank! Here are the details: ");
+            }
+            javelin.tankPrint();
+            
+            
         } else if (decision == tankCreator.TankType.MEDIUM) {
             System.out.println("Selected Tank Type: Medium");
         } else if (decision == tankCreator.TankType.HEAVY) {
